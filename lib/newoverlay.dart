@@ -17,12 +17,22 @@ class _newoverlayState extends State<newoverlay> {
     amountcontroller.dispose();
     super.dispose();
   }
-
   /*storing input APPROACH 1 
   var savedtitle = ''; 
   void savetitleinput(String input) {
     savedtitle = input;
   } */
+
+  void datepicker() {
+    final now = DateTime.now();
+    final firstdate = DateTime(now.year - 2, now.month, now.day);
+
+    showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: firstdate,
+        lastDate: now);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +46,31 @@ class _newoverlayState extends State<newoverlay> {
           decoration: InputDecoration(labelText: "Title"),
           /*  keyboardType: TextInputType.phone, */
         ),
-        TextField(
-          decoration: InputDecoration(labelText: "Amount", prefixText: "\$ "),
-          controller: amountcontroller,
-          keyboardType: TextInputType.number,
-        ),
+        Row(children: [
+          Expanded(
+            child: TextField(
+              decoration:
+                  InputDecoration(labelText: "Amount", prefixText: "\$ "),
+              controller: amountcontroller,
+              keyboardType: TextInputType.number,
+            ),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          //WE  USE EXPANDED WHEN USING ROW INSIDE A ROW OR COLUMN INSIDE A COLOUMN
+          //EXPANDED TAKES AS MUCH SPACE AS IT IS NEEDED
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text("selected date"),
+                IconButton(
+                    onPressed: datepicker, icon: Icon(Icons.calendar_month))
+              ],
+            ),
+          )
+        ]),
         Row(
           children: [
             TextButton(
