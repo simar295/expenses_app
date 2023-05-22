@@ -1,4 +1,5 @@
 import 'package:expenses_app/models/expenseclass.dart';
+import 'package:expenses_app/newoverlay.dart';
 import 'package:flutter/material.dart';
 import './expenseslist.dart';
 
@@ -29,9 +30,18 @@ class expensesstate extends State<expenses> {
     ),
   ];
 
+  void openoverlay() {
+    //opens an overlay to the screen
+    showModalBottomSheet(context: context, builder: (ctx) => newoverlay());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text("FLUTTER EXPENSE TRACKER",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          actions: [IconButton(onPressed: openoverlay, icon: Icon(Icons.add))]),
       body: Column(children: [
         Text("the chart"),
         Expanded(child: expenseslist(expenses: registeredExpenses)),
