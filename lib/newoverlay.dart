@@ -1,3 +1,4 @@
+import 'package:expenses_app/expenses.dart';
 import 'package:expenses_app/models/expenseclass.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,9 @@ import 'package:intl/intl.dart';
 final formatter = DateFormat.yMd();
 
 class newoverlay extends StatefulWidget {
-  const newoverlay({super.key});
+  const newoverlay({super.key, required this.addfunction});
+
+  final void Function(expenseclass value) addfunction;
 
   @override
   State<newoverlay> createState() => _newoverlayState();
@@ -52,13 +55,37 @@ class _newoverlayState extends State<newoverlay> {
     final amountisinvalid = enteredamount == null || enteredamount <= 0;
     if (titlecontroller.text.trim().isEmpty ||
         amountisinvalid ||
-        selectedate == null) {}
+        selectedate == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("invalid input "),
+          content: Text("please enter a valid input "),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: Text("okah"),
+            )
+          ],
+        ),
+      );
+      return;
+    }
+
+    widget.addfunction(expenseclass(
+        title: titlecontroller.text,
+        amount: enteredamount,
+        date: selectedate!,
+        categoryy: selectedcategory));
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.fromLTRB(16, 68, 16, 16),
       child: Column(children: [
         TextField(
           /* onChanged: savetitleinput, */
