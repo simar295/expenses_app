@@ -55,6 +55,7 @@ class _newoverlayState extends State<newoverlay> {
               keyboardType: TextInputType.number,
             ),
           ),
+          
           SizedBox(
             width: 16,
           ),
