@@ -1,4 +1,9 @@
+import 'package:expenses_app/models/expenseclass.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final formatter = DateFormat.yMd();
 
 class newoverlay extends StatefulWidget {
   const newoverlay({super.key});
@@ -10,6 +15,8 @@ class newoverlay extends StatefulWidget {
 class _newoverlayState extends State<newoverlay> {
   final titlecontroller = TextEditingController();
   final amountcontroller = TextEditingController();
+  DateTime? selectedate;
+  category selectedcategory = category.leisure;
 
   @override
   void dispose() {
@@ -23,15 +30,29 @@ class _newoverlayState extends State<newoverlay> {
     savedtitle = input;
   } */
 
-  void datepicker() {
+  void datepicker() async {
     final now = DateTime.now();
-    final firstdate = DateTime(now.year - 2, now.month, now.day);
+    /* final firstdate = DateTime(now.year, now.month + 2, now.day); */
 
-    showDatePicker(
+    final pickeddate = await showDatePicker(
         context: context,
         initialDate: now,
-        firstDate: firstdate,
-        lastDate: now);
+        firstDate: DateTime(2021),
+        lastDate: DateTime(2030));
+    /* .then((value) => null) */
+    setState(() {
+      selectedate = pickeddate;
+    });
+  }
+
+//validating input and checking all types of user errors
+  void submitdata() {
+    final enteredamount = double.tryParse(amountcontroller
+        .text); //tryparse take string input and returns a double number
+    final amountisinvalid = enteredamount == null || enteredamount <= 0;
+    if (titlecontroller.text.trim().isEmpty ||
+        amountisinvalid ||
+        selectedate == null) {}
   }
 
   @override
@@ -55,7 +76,7 @@ class _newoverlayState extends State<newoverlay> {
               keyboardType: TextInputType.number,
             ),
           ),
-          
+
           SizedBox(
             width: 16,
           ),
@@ -65,23 +86,51 @@ class _newoverlayState extends State<newoverlay> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text("selected date"),
+                Text(selectedate == null
+                    ? "no date selected "
+                    : formatter.format(
+                        selectedate! //force dart to tell this not be null
+                        )),
                 IconButton(
                     onPressed: datepicker, icon: Icon(Icons.calendar_month))
               ],
             ),
           )
         ]),
+        SizedBox(
+          height: 16,
+        ),
         Row(
           children: [
+            DropdownButton(
+                value: selectedcategory,
+                items: category.values
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          e.name.toUpperCase(),
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
+                    selectedcategory = value;
+                  });
+                  ;
+                }),
+            const Spacer(),
             TextButton(
                 //removing the overlay using navigator.pop method , here context is the meta data of full overlay
                 onPressed: () => Navigator.pop(context),
                 child: Text("cancel")),
             ElevatedButton(
                 onPressed: () {
-                  print(titlecontroller.text);
-                  print(amountcontroller.text);
+                  submitdata();
                 },
                 child: Text("save"))
           ],

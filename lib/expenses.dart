@@ -20,13 +20,13 @@ class expensesstate extends State<expenses> {
         title: 'Flutter Course',
         amount: 19.99,
         date: DateTime.now(),
-        category: Category.work),
+        categoryy: category.work),
 
     expenseclass(
       title: 'Cinema',
       amount: 15.69,
       date: DateTime.now(),
-      category: Category.leisure,
+      categoryy: category.leisure,
     ),
   ];
 

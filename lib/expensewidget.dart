@@ -26,7 +26,7 @@ class expensewidget extends StatelessWidget {
                 Spacer(),
                 Row(
                   children: [
-                    Icon(categoryicons[expense.category]),
+                    Icon(categoryicons[expense.categoryy]),
                     SizedBox(
                       width: 8,
                     ),
