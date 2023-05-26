@@ -105,7 +105,7 @@ class _newoverlayState extends State<newoverlay> {
           ),
 
           SizedBox(
-            width: 16,
+            width: 10,
           ),
           //WE  USE EXPANDED WHEN USING ROW INSIDE A ROW OR COLUMN INSIDE A COLOUMN
           //EXPANDED TAKES AS MUCH SPACE AS IT IS NEEDED
@@ -114,12 +114,17 @@ class _newoverlayState extends State<newoverlay> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(selectedate == null
-                    ? "no date selected "
+                    ? "SELECT DATE >"
                     : formatter.format(
                         selectedate! //force dart to tell this not be null
                         )),
                 IconButton(
-                    onPressed: datepicker, icon: Icon(Icons.calendar_month))
+                  onPressed: datepicker,
+                  icon: Icon(
+                    Icons.calendar_month,
+                    color: Colors.blueAccent,
+                  ),
+                )
               ],
             ),
           )
@@ -159,7 +164,10 @@ class _newoverlayState extends State<newoverlay> {
                 onPressed: () {
                   submitdata();
                 },
-                child: Text("save"))
+                child: Text(
+                  "save expense",
+                  /*   style: TextStyle(color: Colors.white), */
+                ))
           ],
         )
       ]),

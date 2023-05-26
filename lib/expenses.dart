@@ -76,6 +76,7 @@ class expensesstate extends State<expenses> {
         removefunction: removexpense,
       );
     }
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -85,6 +86,20 @@ class expensesstate extends State<expenses> {
       body: Column(children: [
         Text("the chart"),
         Expanded(child: maincontent),
+        Container(
+          padding: EdgeInsets.only(bottom: 60),
+          child: IconButton(
+            color: Color.fromARGB(255, 255, 255, 255),
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll(Color.fromARGB(255, 241, 84, 79))),
+            onPressed: openoverlay,
+            icon: Icon(
+              Icons.add,
+              size: 70,
+            ),
+          ),
+        ),
       ]),
     );
   }
