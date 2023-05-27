@@ -27,7 +27,7 @@ class expensesstate extends State<expenses> {
   final List<expenseclass> registeredExpenses = [
     //dummy data
     expenseclass(
-        title: 'Flutter Course',
+        title: 'Flutter Course made by simar',
         amount: 19.99,
         date: DateTime.now(),
         categoryy: category.work),
