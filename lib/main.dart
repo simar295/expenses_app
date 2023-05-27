@@ -23,11 +23,10 @@ class mainclassState extends State<mainclass> {
   void switchmode(bool a) {
     setState(() {
       if (a) {
-         getmode = ThemeMode.dark;
-      }else{
+        getmode = ThemeMode.dark;
+      } else {
         getmode = ThemeMode.light;
       }
-     
     });
   }
 

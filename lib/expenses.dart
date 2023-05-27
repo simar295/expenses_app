@@ -42,7 +42,9 @@ class expensesstate extends State<expenses> {
 
   void openoverlay() {
     //opens an overlay to the screen
+
     showModalBottomSheet(
+        /* useSafeArea: true, */
         isScrollControlled: true, //prevent overlapping of keyboard
         context: context,
         builder: (ctx) => newoverlay(
@@ -88,7 +90,7 @@ class expensesstate extends State<expenses> {
         removefunction: removexpense,
       );
     }
-
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -112,43 +114,84 @@ class expensesstate extends State<expenses> {
                   }),
             ),
           ]),
-      body: Column(children: [
-        Chart(expenses: registeredExpenses),
-        Expanded(child: maincontent),
-        Container(
-          padding: EdgeInsets.fromLTRB(25, 10, 25, 25),
-          child: Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                blurRadius: 60,
-                spreadRadius: 5,
-                offset: Offset(
-                  -5,
-                  15,
+      body: width < 600
+          ? Column(children: [
+              Chart(expenses: registeredExpenses),
+              Expanded(child: maincontent),
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 10, 25, 25),
+                child: Container(
+                  decoration: const BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      blurRadius: 60,
+                      spreadRadius: 5,
+                      offset: Offset(
+                        -5,
+                        15,
+                      ),
+                      color: Color.fromARGB(
+                        255,
+                        255,
+                        255,
+                        255,
+                      ),
+                    ),
+                  ]),
+                  child: 
+                  IconButton(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                          Color.fromARGB(255, 255, 77, 77)),
+                    ),
+                    onPressed: openoverlay,
+                    icon: Icon(
+                      Icons.add,
+                      size: 50,
+                    ),
+                  ),
                 ),
-                color: Color.fromARGB(
-                  255,
-                  255,
-                  255,
-                  255,
+              ),
+            ])
+          : Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 0, 1, 25),
+                  child: Container(
+                    decoration: const BoxDecoration(boxShadow: [
+                      BoxShadow(
+                        blurRadius: 60,
+                        spreadRadius: 5,
+                        offset: Offset(
+                          -5,
+                          15,
+                        ),
+                        color: Color.fromARGB(
+                          255,
+                          255,
+                          255,
+                          255,
+                        ),
+                      ),
+                    ]),
+                    child: IconButton(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 255, 77, 77)),
+                      ),
+                      onPressed: openoverlay,
+                      icon: Icon(
+                        Icons.add,
+                        size: 50,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ]),
-            child: IconButton(
-              color: Color.fromARGB(255, 255, 255, 255),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStatePropertyAll(Color.fromARGB(255, 255, 77, 77)),
-              ),
-              onPressed: openoverlay,
-              icon: Icon(
-                Icons.add,
-                size: 50,
-              ),
+                Expanded(child: Chart(expenses: registeredExpenses)),
+                Expanded(child: maincontent),
+              ],
             ),
-          ),
-        ),
-      ]),
     );
   }
 }

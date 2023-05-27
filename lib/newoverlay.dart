@@ -1,5 +1,6 @@
 import 'package:expenses_app/expenses.dart';
 import 'package:expenses_app/models/expenseclass.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,9 +58,9 @@ class _newoverlayState extends State<newoverlay> {
     if (titlecontroller.text.trim().isEmpty ||
         amountisinvalid ||
         selectedate == null) {
-      showDialog(
+      showCupertinoDialog(
         context: context,
-        builder: (ctx) => AlertDialog(
+        builder: (ctx) => CupertinoAlertDialog(
           title: Text("invalid input "),
           content: Text("please enter a valid input "),
           actions: [
