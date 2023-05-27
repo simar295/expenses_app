@@ -2,6 +2,7 @@ import 'package:expenses_app/expenses.dart';
 import 'package:expenses_app/models/expenseclass.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 final formatter = DateFormat.yMd();
@@ -91,14 +92,31 @@ class _newoverlayState extends State<newoverlay> {
           /* onChanged: savetitleinput, */
           controller: titlecontroller,
           maxLength: 50,
-          decoration: InputDecoration(labelText: "Title"),
+          decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.greenAccent),
+              ),
+              errorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 66, 125, 145),
+                ),
+              ),
+              labelText: "Title",
+              labelStyle: GoogleFonts.poppins()),
+
           /*  keyboardType: TextInputType.phone, */
         ),
         Row(children: [
           Expanded(
             child: TextField(
-              decoration:
-                  InputDecoration(labelText: "Amount", prefixText: "\$ "),
+              decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.greenAccent),
+                  ),
+                  labelText: "Amount",
+                  prefixText: "\$ ",
+                  labelStyle: GoogleFonts.poppins()),
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
               controller: amountcontroller,
               keyboardType: TextInputType.number,
             ),
@@ -113,11 +131,14 @@ class _newoverlayState extends State<newoverlay> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(selectedate == null
-                    ? "SELECT DATE >"
-                    : formatter.format(
-                        selectedate! //force dart to tell this not be null
-                        )),
+                Text(
+                  selectedate == null
+                      ? "Select Date "
+                      : formatter.format(
+                          selectedate! //force dart to tell this not be null
+                          ),
+                  style: GoogleFonts.poppins(),
+                ),
                 IconButton(
                   onPressed: datepicker,
                   icon: Icon(
@@ -142,6 +163,8 @@ class _newoverlayState extends State<newoverlay> {
                         value: e,
                         child: Text(
                           e.name.toUpperCase(),
+                          style:
+                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
                         ),
                       ),
                     )
@@ -153,19 +176,22 @@ class _newoverlayState extends State<newoverlay> {
                   setState(() {
                     selectedcategory = value;
                   });
-                  ;
                 }),
             const Spacer(),
             TextButton(
                 //removing the overlay using navigator.pop method , here context is the meta data of full overlay
                 onPressed: () => Navigator.pop(context),
-                child: Text("cancel")),
+                child: Text(
+                  "cancel",
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                )),
             ElevatedButton(
                 onPressed: () {
                   submitdata();
                 },
                 child: Text(
                   "save expense",
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                   /*   style: TextStyle(color: Colors.white), */
                 ))
           ],

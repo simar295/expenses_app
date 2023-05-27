@@ -1,6 +1,7 @@
 //creating a full wdiget to be displayed by the itembuilder of the listview.builder
 import 'package:expenses_app/models/expenseclass.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class expensewidget extends StatelessWidget {
   const expensewidget(this.expense,
@@ -15,14 +16,19 @@ class expensewidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
           children: [
-            Text(expense.title),
+            Text(
+              expense.title,
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            ),
             SizedBox(
               height: 4,
             ),
             Row(
               children: [
                 Text(
-                    '\$${expense.amount.toStringAsFixed(2)}'), //shows decimal values till 2 places
+                  '\$${expense.amount.toStringAsFixed(2)}',
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                ), //shows decimal values till 2 places
                 Spacer(),
                 Row(
                   children: [
@@ -30,7 +36,10 @@ class expensewidget extends StatelessWidget {
                     SizedBox(
                       width: 8,
                     ),
-                    Text(expense.formatteddate)
+                    Text(
+                      expense.formatteddate,
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                    )
                   ],
                 )
               ],
