@@ -27,13 +27,13 @@ class expensesstate extends State<expenses> {
   final List<expenseclass> registeredExpenses = [
     //dummy data
     expenseclass(
-        title: 'Flutter Course made by simar',
+        title: 'Made by simar',
         amount: 19.99,
         date: DateTime.now(),
         categoryy: category.work),
 
     expenseclass(
-      title: 'Cinema',
+      title: 'expense tracker',
       amount: 15.69,
       date: DateTime.now(),
       categoryy: category.leisure,
@@ -82,7 +82,10 @@ class expensesstate extends State<expenses> {
   @override
   Widget build(BuildContext context) {
     Widget maincontent = Center(
-      child: Text("start adding expenses"),
+      child: Text(
+        "start adding expenses",
+        style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+      ),
     );
     if (registeredExpenses.isNotEmpty) {
       maincontent = expenseslist(
@@ -137,8 +140,7 @@ class expensesstate extends State<expenses> {
                       ),
                     ),
                   ]),
-                  child: 
-                  IconButton(
+                  child: IconButton(
                     color: Color.fromARGB(255, 255, 255, 255),
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(

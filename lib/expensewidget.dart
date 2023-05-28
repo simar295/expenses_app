@@ -18,7 +18,10 @@ class expensewidget extends StatelessWidget {
           children: [
             Text(
               expense.title,
-              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold,
+                color: Colors.pink,
+              ),
             ),
             SizedBox(
               height: 4,
@@ -27,18 +30,25 @@ class expensewidget extends StatelessWidget {
               children: [
                 Text(
                   '\$${expense.amount.toStringAsFixed(2)}',
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold, color: Colors.greenAccent),
                 ), //shows decimal values till 2 places
                 Spacer(),
                 Row(
                   children: [
-                    Icon(categoryicons[expense.categoryy]),
+                    Icon(
+                      categoryicons[expense.categoryy],
+                      color: Color.fromARGB(255, 2, 33, 59),
+                    ),
+
                     SizedBox(
                       width: 8,
                     ),
+                    
                     Text(
                       expense.formatteddate,
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                      style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold, fontSize: 10),
                     )
                   ],
                 )
