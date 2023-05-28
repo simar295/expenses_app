@@ -41,7 +41,7 @@ class expensewidget extends StatelessWidget {
                       color: Color.fromARGB(255, 2, 33, 59),
                     ),
 
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     
