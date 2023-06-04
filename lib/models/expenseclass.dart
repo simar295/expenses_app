@@ -25,6 +25,7 @@ class expenseclass {
     required this.categoryy,
   }) : id = uuid.v4(); //initializer list concept
 
+
   final String id;
   final String title;
   final double amount;
